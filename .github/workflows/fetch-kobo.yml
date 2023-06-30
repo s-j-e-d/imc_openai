@@ -27,7 +27,7 @@ jobs:
         run: |
           git config user.name "Automated"
           git config user.email "actions@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/s-j-e-d/imc_openai.git
+          git remote set-url origin https://x-access-token:${{ secrets.OPENAI }}@github.com/s-j-e-d/imc_openai.git
           git add -A
           timestamp=$(date -u)
           git commit -m "Latest data: ${timestamp}" || exit 0
