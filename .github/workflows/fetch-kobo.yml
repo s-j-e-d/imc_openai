@@ -24,14 +24,12 @@ jobs:
           KOBO_TOKEN: ${{ secrets.KOBO_TOKEN }}
 
 
-         
-
       - name: Commit and push if it changed
         run: |
-          git config user.name "Automated"
-          git config user.email "actions@users.noreply.github.com"
-          git add -A
-          timestamp=$(date -u)
-          git commit -m "Latest data: ${timestamp}" || exit 0
-          git push https://x-access-token:${{ secrets.OPENAI }}@github.com/s-j-e-d/imc_openai.git HEAD:master
+            git config user.name "Automated"
+            git config user.email "actions@users.noreply.github.com"
+            git pull origin main
+            git add -A
+            git diff --quiet && git diff --staged --quiet || (echo "${{ secrets.OPENAI }}" > token.txt; git commit -m "Latest data: $(date -u)"; GIT_ASKPASS="./askpass.sh" git push origin HEAD:main < token.txt)
+        
         
