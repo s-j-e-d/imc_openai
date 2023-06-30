@@ -30,6 +30,5 @@ jobs:
             git config user.email "actions@users.noreply.github.com"
             git pull origin main
             git add -A
-            git diff --quiet && git diff --staged --quiet || (echo "${{ secrets.OPENAI }}" > token.txt; git commit -m "Latest data: $(date -u)"; GIT_ASKPASS="./askpass.sh" git push origin HEAD:main < token.txt)
-        
+            git diff --quiet && git diff --staged --quiet || (echo "${{ secrets.OPENAI }}" > token.txt; git commit -m "Latest data: $(date -u)"; git push origin HEAD:main < token.txt)
         
